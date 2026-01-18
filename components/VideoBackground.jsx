@@ -5,7 +5,7 @@ import mosqueBackground from "@/assets/mosque-background.jpg"
 
 const VideoBackground = ({
   youtubeVideoId = "k2e7hUiF39E",
-  useStaticBackground = false
+  useStaticBackground = true
 }) => {
   const [videoError, setVideoError] = useState(false)
 
