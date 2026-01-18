@@ -1,27 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Mosque Digital Signage Design System
+   Islamic aesthetic with deep greens, gold accents, spiritual elegance
+   All colors in HSL format
+*/
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Deep forest/emerald Islamic theme */
+    --background: 160 40% 6%;
+    --foreground: 45 30% 92%;
+
+    --card: 160 35% 10%;
+    --card-foreground: 45 30% 92%;
+
+    --popover: 160 35% 10%;
+    --popover-foreground: 45 30% 92%;
+
+    /* Emerald green primary */
+    --primary: 158 64% 32%;
+    --primary-foreground: 45 30% 95%;
+
+    /* Deep green secondary */
+    --secondary: 160 40% 14%;
+    --secondary-foreground: 45 30% 92%;
+
+    /* Muted greens */
+    --muted: 160 30% 18%;
+    --muted-foreground: 160 20% 55%;
+
+    /* Gold accent */
+    --accent: 42 85% 55%;
+    --accent-foreground: 160 40% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 160 30% 20%;
+    --input: 160 30% 20%;
+    --ring: 42 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens for mosque signage */
+    --gold: 42 85% 55%;
+    --gold-glow: 42 90% 65%;
+    --emerald-deep: 160 50% 8%;
+    --emerald-light: 158 50% 40%;
+    --cream: 45 30% 92%;
+    --prayer-active: 42 85% 55%;
+    --prayer-inactive: 160 30% 22%;
+    
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(42 85% 55%), hsl(38 80% 45%));
+    --gradient-emerald: linear-gradient(180deg, hsl(160 40% 8%), hsl(160 50% 4%));
+    --gradient-overlay: linear-gradient(180deg, hsl(160 40% 6% / 0.3), hsl(160 40% 6% / 0.95));
+    
+    /* Shadows */
+    --shadow-gold: 0 0 30px hsl(42 85% 55% / 0.4);
+    --shadow-soft: 0 4px 20px hsl(160 40% 4% / 0.5);
+
+    --sidebar-background: 160 40% 8%;
+    --sidebar-foreground: 45 30% 92%;
+    --sidebar-primary: 158 64% 32%;
+    --sidebar-primary-foreground: 45 30% 95%;
+    --sidebar-accent: 160 30% 18%;
+    --sidebar-accent-foreground: 45 30% 92%;
+    --sidebar-border: 160 30% 20%;
+    --sidebar-ring: 42 85% 55%;
+  }
+
+  .dark {
+    --background: 160 40% 6%;
+    --foreground: 45 30% 92%;
+    --card: 160 35% 10%;
+    --card-foreground: 45 30% 92%;
+    --popover: 160 35% 10%;
+    --popover-foreground: 45 30% 92%;
+    --primary: 158 64% 32%;
+    --primary-foreground: 45 30% 95%;
+    --secondary: 160 40% 14%;
+    --secondary-foreground: 45 30% 92%;
+    --muted: 160 30% 18%;
+    --muted-foreground: 160 20% 55%;
+    --accent: 42 85% 55%;
+    --accent-foreground: 160 40% 6%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 160 30% 20%;
+    --input: 160 30% 20%;
+    --ring: 42 85% 55%;
+    --sidebar-background: 160 40% 8%;
+    --sidebar-foreground: 45 30% 92%;
+    --sidebar-primary: 158 64% 32%;
+    --sidebar-primary-foreground: 45 30% 95%;
+    --sidebar-accent: 160 30% 18%;
+    --sidebar-accent-foreground: 45 30% 92%;
+    --sidebar-border: 160 30% 20%;
+    --sidebar-ring: 42 85% 55%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
 }
 
+/* Custom animations for mosque signage */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-amiri {
+    font-family: 'Amiri', serif;
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Pulse glow for active prayer */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(42 85% 55% / 0.4), 0 0 40px hsl(42 85% 55% / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(42 85% 55% / 0.6), 0 0 60px hsl(42 85% 55% / 0.3);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
   }
 }
