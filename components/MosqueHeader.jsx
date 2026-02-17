@@ -2,12 +2,14 @@
 
 import DigitalClock from "./DigitalClock"
 import DateDisplay from "./DateDisplay"
+import Logo from "@/assets/icon_ek.png"
 
 const MosqueHeader = ({ mosqueName }) => {
   return (
     <header className="relative z-10 flex flex-col items-center justify-center pt-8 pb-4 px-8">
       {/* Mosque Name */}
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-medium text-foreground tracking-wide mb-4">
+      <img src={Logo.src} alt="Logo" className="w-28 h-28 mt-2" />
+      <h1 className="text-2xl md:text-3xl lg:text-5xl font-playfair font-medium text-foreground tracking-wide mb-2 opacity-90">
         {mosqueName}
       </h1>
 

@@ -18,24 +18,24 @@ const VideoBackground = ({
           backgroundImage: `url(${mosqueBackground.src})`
         }}
       />
-      
+
 
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-background/60" />
 
       {/* YouTube Embed - show if enabled and no static background preference */}
       {!useStaticBackground && !videoError && (
-       
-        <iframe 
+
+        <iframe
           className="absolute top-1/2 left-1/2 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40"
-          width="560" 
-          height="315" 
-          src="https://www.youtube.com/embed/k2e7hUiF39E?si=p7XIkzGRYXrHvc5k&amp;autoplay=1&controls=0" 
-          title="Makkah Live Stream" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" 
-          allowfullscreen 
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/k2e7hUiF39E?si=p7XIkzGRYXrHvc5k&amp;autoplay=1&controls=0"
+          title="Makkah Live Stream"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
           onError={() => setVideoError(true)}
         />
       )}

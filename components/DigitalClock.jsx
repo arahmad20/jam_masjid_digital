@@ -18,13 +18,13 @@ const DigitalClock = () => {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
-      hour12: true
+      hour12: false
     })
   }
 
   return (
     <div className="text-center">
-      <div className="text-6xl md:text-7xl lg:text-8xl font-inter font-light tracking-wider text-foreground">
+      <div className="text-7xl md:text-9xl lg:text-[12rem] leading-none font-bold tracking-wider text-foreground drop-shadow-2xl">
         {formatTime(time)}
       </div>
     </div>
