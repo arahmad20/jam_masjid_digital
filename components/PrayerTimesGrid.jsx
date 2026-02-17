@@ -3,12 +3,23 @@
 import { useState, useEffect } from "react"
 import PrayerTimeCard from "./PrayerTimeCard"
 
+const formatPrayerTimes = (timings) => {
+  return [
+    { name: "Subuh", arabicName: "الفجر", time: timings.Fajr },
+    { name: "Syuruq", arabicName: "الشروق", time: timings.Sunrise },
+    { name: "Dzuhur", arabicName: "الظهر", time: timings.Dhuhr },
+    { name: "Ashar", arabicName: "العصر", time: timings.Asr },
+    { name: "Maghrib", arabicName: "المغرب", time: timings.Maghrib },
+    { name: "Isya", arabicName: "العشاء", time: timings.Isha }
+  ];
+};
+
 const fetchPrayerTimes = async (latitude, longitude) => {
   try {
     // Gunakan API Aladhan untuk production
     // Method 2 = Islamic Society of North America (bisa diganti sesuai kebutuhan, misal Kemenag gunakan method tertentu atau custom params)
     const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2`);
-    
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -40,14 +51,26 @@ const parseTimeToMinutes = timeStr => {
   return totalMinutes
 }
 
-const PrayerTimesGrid = () => {
-  const [prayerTimes, setPrayerTimes] = useState([])
+const PrayerTimesGrid = ({ initialData }) => {
+  const [prayerTimes, setPrayerTimes] = useState(initialData || [])
   const [nextPrayerIndex, setNextPrayerIndex] = useState(0)
 
   useEffect(() => {
+    if (initialData && initialData.length > 0) {
+      setPrayerTimes(initialData);
+      return;
+    }
+
     // Default coordinates (Makkah) - replace with your mosque's coordinates
-    const latitude = -7.6731086
-    const longitude = 109.0459973
+    // Default: -7.6731086, 109.0459973 (Example Location)
+    let latitude = -7.6731086
+    let longitude = 109.0459973
+
+    const savedLat = localStorage.getItem("mosque_latitude");
+    const savedLong = localStorage.getItem("mosque_longitude");
+
+    if (savedLat) latitude = parseFloat(savedLat);
+    if (savedLong) longitude = parseFloat(savedLong);
 
     fetchPrayerTimes(latitude, longitude).then(setPrayerTimes)
   }, [])
